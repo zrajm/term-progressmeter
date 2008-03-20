@@ -1,0 +1,53 @@
+#!/usr/bin/perl
+use strict;
+use Term::ProgressMeter;
+
+# Because both max_value and current_value are references you may
+# subsequently change them however you like. Term::ProgressMeter will
+# dynamically adapt.
+
+my $max     = 999999;
+my $counter = 0;
+Term::ProgressMeter::set(                       # invoke Term::ProgressMeter
+    update_interval => .1,                      #   every tenth of a seconds
+    current_value   => \$counter,               #   reference to current count
+    max_value       => \$max,                   #   reference to maximum count
+);                                              #
+
+
+print "This will go on for ever, and is only to exemplify the progress bar.\n";
+while (1) {
+    $counter ++;
+    # NOTE: Because Term::ProgressMeter is implemented using alarm()
+    # you cannot use sleep() or alarm(). :(
+    if ($counter > $max) {
+	$counter = 0;
+
+	# Before outputting anything, we need to hide and/or stop the
+	# progress meter.
+
+	# Call Term::ProgressMeter::hide if you just want to output
+	# something in the middle of everything. Quite usefull for
+	# programs that outputs stuff occasionally, but not all that
+	# often (that makes you want to have a progress meter, as well
+	# as the normal output).
+
+	# Term::ProgressMeter::stop hides and stops the progress
+	# meter. Terminating any further updates will be done, until
+	# started again (with start() or restart()).
+
+	Term::ProgressMeter::stop; 
+	print "done!\n";
+
+	# Term::ProgressMeter::restart is used to reset and restart
+	# the progress meter, this causes the time estimate to be
+	# cleared and recalculated from scratch.
+	Term::ProgressMeter::restart;
+
+	# Add another digit to the max value, making next progress
+	# meter fill even slower.
+	$max .= 9;
+    }
+}
+
+#[eof]
