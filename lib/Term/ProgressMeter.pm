@@ -12,6 +12,8 @@ our $VERSION = '0.01';
 # (if stdout is redirected to file, and stderr is not, then there's no
 # reason to erase it)
 
+# FIXME: needs testcases!
+
 =head1 NAME
 
 Term::ProgressMeter - Display progress meter at specified intervals

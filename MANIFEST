@@ -1,6 +1,7 @@
-Changes
 Makefile.PL
+lib/Term/ProgressMeter.pm
+t/Term-ProgressMeter.t
+Changes
 MANIFEST
 README
-t/Term-ProgressMeter.t
-lib/Term/ProgressMeter.pm
+contrib/progressmeter-test
