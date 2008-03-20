@@ -1,0 +1,6 @@
+Changes
+Makefile.PL
+MANIFEST
+README
+t/Term-ProgressMeter.t
+lib/Term/ProgressMeter.pm
