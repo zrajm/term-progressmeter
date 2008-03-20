@@ -126,8 +126,17 @@ sub pretty_time {
 
 # return progress bar string
 sub meter {
-    my $cur = ref($opt{current_value}) eq 'SCALAR' ? ${$opt{current_value}} : 0;
-    my $max = ref($opt{max_value})     eq 'SCALAR' ? ${$opt{max_value}}     : 0;
+    my ($cur, $max) = (0, 0);
+    if (ref($opt{current_value}) eq 'SCALAR') {
+	$cur = ${$opt{current_value}};
+    } elsif (ref($opt{current_value}) eq 'CODE') {
+	$cur = &{$opt{current_value}};
+    }
+    if (ref($opt{max_value}) eq 'SCALAR') {
+	$max = ${$opt{max_value}};
+    } elsif (ref($opt{max_value}) eq 'CODE') {
+	$max = &{$opt{max_value}};
+    }
 
     # percentage
     my $part   = $cur / $max;                   #     float: 0..1 (start..end)
