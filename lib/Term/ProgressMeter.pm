@@ -177,6 +177,7 @@ sub show {                                      # show progress meter
 }                                               #
 sub hide {                                      # hide progress meter
     return unless $opt{now_visible};            #   do nada if not visible
+    return unless -t STDOUT;                    #     or output not on terminal
     my $fh = $opt{outhandle};                   #   filehandle
     print $fh meter() . "\r\e[K";               #   erase visible progress bar
     $opt{now_visible} = FALSE;                  #   note that it's not visible
