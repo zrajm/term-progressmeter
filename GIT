@@ -1,0 +1,11 @@
+The latest version of Term::ProgressMeter may be obtained using git,
+e.g.:
+
+    git clone http://www.update.uu.se/~zrajm/programs/repo/term-progressmeter.git
+
+or (if you know my password) ;)
+
+    git clone psilocybe.update.uu.se:~/public_html/programs/repo/term-progressmeter.git
+
+[eof]
+
