@@ -70,11 +70,10 @@ our %opt = (                                    # defaults
 
 sub _term_width {
     eval { require Term::ReadKey };
-    # If GetTerminalSize() fails it should (according to its
-    # docs) return an empty list. It doesn't---that's why we
-    # have the eval {}---but also it may appear to succeed and
-    # return a width of zero.
-    my $width;
+    # If GetTerminalSize() fails it should (according to its docs)
+    # return an empty list. It doesn't---that's why we have the eval{}
+    # -- but also it may appear to succeed and return a width of zero.
+    my $width = 80;
     eval {
 	$width = (Term::ReadKey::GetTerminalSize($opt{outhandle}))[0];
 	if ($^O eq 'MSWin32') { $width-- }
@@ -83,7 +82,7 @@ sub _term_width {
 	$@ = "Term::ReadKey::GetTerminalSize returned zero\n";
     };
     if ($@) {
-	carp "Cannot detect terminal width: Using $width chars\n" . "$@";
+	carp "Cannot detect terminal width: Using `$width' chars\n" . "$@";
     } else {
 	$opt{term_width} = $width;
     }
